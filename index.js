@@ -3,10 +3,11 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
-const swaggerUI = require('swagger-ui-express');
+const swaggerUi = require('swagger-ui-express');
 const swaggerOptions = { customCssUrl:'/swagger-ui.css'};
 const routes = require('./src/routes');
 const app = express();
+const authDocProducao = require('./src/middlewares/authDoc');
 require('dotenv').config();
 
 
@@ -19,7 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 if(process.env.NODE_ENV !== 'test'){
 app.get('/', (req, res) => {/* #swagger.ignore = true*/ res.redirect('/doc');});
-app.use('/doc', swaggerUI.serve, swaggerUi.setup(swaggerFile, swaggerOptions));
+app.use('/doc', authDocProducao, swaggerUi.serve, swaggerUi.setup(swaggerFile, swaggerOptions));
 }
 
 routes(app);
