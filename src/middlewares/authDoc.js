@@ -11,23 +11,23 @@ async function authDocProducao (req, res, next){
         return next();
     }
 
-    if(senhaDigitada){
+    if(senhaDigitada){  /* for tem que ter o mesmo id/name do html */
         //usuario digitou a senha errada
         res.status(401).set('Content-Type', 'text/html');
         res.send(Buffer.from(`
             <form method="post">
                 <p style="color: red;">Senha inválida</p>
-                <label for="senhaDigitada">Senha da documentação</label> /* for tem que ter o mesmo id/name do html */
+                <label for="senhaDigitada">Senha da documentação</label>
                 <input type="password" name="senhaDigitada" id="senhaDitigada"/>
                 <button type="submit"> Entrar</button>
             </form>
         `))
-    } else{
+    } else{  /* for tem que ter o mesmo id/name do html */
         //usuario ainda nao digitou a senha e está em modo produção
         res.status(200).set('Content-Type', 'text/html');
         res.send(Buffer.from(`
             <form method="post">
-                <label for="senhaDigitada">Senha da documentação</label> /* for tem que ter o mesmo id/name do html */
+                <label for="senhaDigitada">Senha da documentação</label>
                 <input type="password" name="senhaDigitada" id="senhaDitigada"/>
                 <button type="submit"> Entrar</button>
             </form>
